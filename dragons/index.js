@@ -6,6 +6,7 @@ const dragons = chatskills.app('dragons');
 
 // launch method to run at startup
 dragons.launch(function(req, res) {
+  res.session('dragon-count', 0);
   res.say('Ask me to about dragons!');
 
   // keep session open
@@ -21,8 +22,12 @@ dragons.intent('dragons', {
   },
   function(req, res) {
     let dragonType = req.slot('DragonType');
+    let dragonCount = req.session('dragon-count');
 
-    res.say(`Aye, there be ${dragonType} dragons.`);
+    // update HP
+    dragonCount++;
+    res.session('dragon-count', dragonCount);
+    res.say(`Aye, there be ${dragonType} dragons. There are now ${dragonCount} dragons.`);
     res.shouldEndSession(false);
   }
 );
