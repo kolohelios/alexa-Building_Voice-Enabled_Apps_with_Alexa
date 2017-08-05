@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "alexa-app": "^2.1.0",
+    "alexa-app": "*",
     "chatskills": "*",
     "readline-sync": "*",
     "xml2js": "*",
     "request": "*",
-    "deasync": "*"
+    "deasync": "*",
+    "dotenv": "*"
   }
 }
