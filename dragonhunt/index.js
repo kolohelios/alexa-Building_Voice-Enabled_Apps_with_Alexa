@@ -28,13 +28,17 @@ app.launch(function(req, res) {
 // create an intent
 app.intent('look', {
   slots: {},
-  utterances: [ '{look|search|find} {a| } {weapon|sword|}' ]
+  utterances: [ '{look|search|find} {a|for| } {weapon|sword|}' ]
   },
   function(req, res) {
-    // user picked up weapon, store in session
-    res.session('has-weapon', true);
+    if (req.session('has-weapon')) {
+      res.say('You can only carry one weapon at a time.');
+    } else {
+      // user picked up weapon, store in session
+      res.session('has-weapon', true);
 
-    res.say('You search the cave and find a lance on the ground!');
+      res.say('You search the cave and find a lance on the ground!');
+    }
     res.shouldEndSession(false);
   }
 );
